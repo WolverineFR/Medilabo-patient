@@ -3,7 +3,6 @@ package com.openclassrooms.medilabo_solutions.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +15,13 @@ public class PatientServiceImpl implements PatientService {
 	@Autowired
 	private PatientRepository patientRepository;
 
-	
 	@Override
 	public List<Patient> getAllPatients() {
 		return patientRepository.findAll();
 	}
 
 	@Override
-	public Optional<Patient> getPatientById(ObjectId id) {
+	public Optional<Patient> getPatientById(String id) {
 		return patientRepository.findById(id);
 	}
 
@@ -33,9 +31,9 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public void deletePatientById(ObjectId id) {
+	public void deletePatientById(String id) {
 		patientRepository.deleteById(id);
-		
+
 	}
 
 }
