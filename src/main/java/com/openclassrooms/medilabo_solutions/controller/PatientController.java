@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import com.openclassrooms.medilabo_solutions.service.PatientService;
 import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/patient")
 public class PatientController {
 
 	@Autowired
@@ -33,7 +35,7 @@ public class PatientController {
 		this.patientService = patientService;
 	}
 
-	@GetMapping("/patient/all")
+	@GetMapping("/all")
 	public ResponseEntity<List<Patient>> getAllPatient() {
 		List<Patient> patients = patientService.getAllPatients();
 		logger.info("Récupération de tous les patients, count={}", patients.size());
@@ -41,7 +43,7 @@ public class PatientController {
 
 	}
 
-	@GetMapping("/patient/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable Integer id) {
 		return patientService.getPatientById(id).map(patient -> {
 			logger.info("Patient trouvé avec id={}", id);
@@ -52,14 +54,14 @@ public class PatientController {
 		});
 	}
 
-	@PostMapping("/patient")
+	@PostMapping
 	public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient) {
 		Patient saved = patientService.savePatient(patient);
 		logger.info("Patient créé avec id={}", saved.getId());
 		return ResponseEntity.status(201).body(saved);
 	}
 
-	@PutMapping("/patient/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @Valid @RequestBody Patient updatePatient) {
 		if (!patientService.getPatientById(id).isPresent()) {
 			logger.warn("Le patient n'existe pas avec id={}", id);
@@ -71,7 +73,7 @@ public class PatientController {
 		return ResponseEntity.ok(updated);
 	}
 
-	@DeleteMapping("/patient/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletePatientById(@PathVariable Integer id) {
 		if (!patientService.getPatientById(id).isPresent()) {
 			logger.warn("Le patient n'existe pas avec id={}", id);
