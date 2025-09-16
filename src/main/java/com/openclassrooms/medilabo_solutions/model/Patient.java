@@ -2,28 +2,58 @@ package com.openclassrooms.medilabo_solutions.model;
 
 import java.time.LocalDate;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Id;
 
-@Document(collection = "patients")
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+@Entity
+@Table(name = "patient")
 public class Patient {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
+	@NotBlank(message = "Le prénom est obligatoire")
+	@Size(max = 100, message = "Le prénom ne doit pas dépasser 100 caractères")
 	private String firstName;
+
+	@NotBlank(message = "Le nom est obligatoire")
+	@Size(max = 100, message = "Le nom ne doit pas dépasser 100 caractères")
 	private String lastName;
+
+	@NotNull(message = "La date de naissance est obligatoire")
+	@Past(message = "La date de naissance doit être antérieux à aujourd'hui")
 	private LocalDate birthDate;
-	private String gender;
+
+	@NotBlank(message = "Le genre est obligatoire")
+	@Size(max = 10)
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
+
+	@Size(max = 255, message = "L'adresse ne doit pas dépasser 255 caractères")
 	private String address;
+
+	@Pattern(regexp = "^(\\+?[0-9 .-]{6,20})?$", message = "Le numéro de téléphone doit contenir uniquement des chiffres, espaces, +, - et .")
+	@Size(max = 20, message = "Le numéro de téléphone ne peut pas dépasser 20 charactères")
 	private String phone;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -51,11 +81,11 @@ public class Patient {
 		this.birthDate = birthDate;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -74,5 +104,10 @@ public class Patient {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	public enum Gender {
+	    M, F
+	}
+
 
 }

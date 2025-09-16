@@ -9,10 +9,10 @@ public interface PatientService {
 
 	List<Patient> getAllPatients();
 
-	Optional<Patient> getPatientById(String id);
+	Optional<Patient> getPatientById(Integer id);
 
 	Patient savePatient(Patient patient);
 
-	void deletePatientById(String id);
+	void deletePatientById(Integer id);
 
 }
