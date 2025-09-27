@@ -94,7 +94,7 @@ public class Patient {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = (address != null && address.trim().isEmpty()) ? null : address;
 	}
 
 	public String getPhone() {
@@ -102,7 +102,7 @@ public class Patient {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.phone = (phone != null && phone.trim().isEmpty()) ? null : phone;
 	}
 	
 	public enum Gender {
