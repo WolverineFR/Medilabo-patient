@@ -1,4 +1,4 @@
-package com.openclassrooms.medilabo_solutions.configurations;
+package com.openclassrooms.medilabo.patient.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

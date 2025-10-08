@@ -1,9 +1,9 @@
-package com.openclassrooms.medilabo_solutions.service;
+package com.openclassrooms.medilabo.patient.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.openclassrooms.medilabo_solutions.model.Patient;
+import com.openclassrooms.medilabo.patient.model.Patient;
 
 public interface PatientService {
 

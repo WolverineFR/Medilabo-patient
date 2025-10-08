@@ -1,4 +1,4 @@
-package com.openclassrooms.medilabo_solutions.model;
+package com.openclassrooms.medilabo.patient.model;
 
 import java.time.LocalDate;
 

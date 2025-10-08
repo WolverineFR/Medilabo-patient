@@ -1,4 +1,4 @@
-package com.openclassrooms.medilabo_solutions.controller;
+package com.openclassrooms.medilabo.patient.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.openclassrooms.medilabo_solutions.model.Patient;
-import com.openclassrooms.medilabo_solutions.service.PatientService;
+import com.openclassrooms.medilabo.patient.model.Patient;
+import com.openclassrooms.medilabo.patient.service.PatientService;
 
 import jakarta.validation.Valid;
 

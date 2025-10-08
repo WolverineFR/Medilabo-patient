@@ -1,4 +1,4 @@
-package com.openclassrooms.medilabo_solutions.service;
+package com.openclassrooms.medilabo.patient.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.medilabo_solutions.model.Patient;
-import com.openclassrooms.medilabo_solutions.repository.PatientRepository;
+import com.openclassrooms.medilabo.patient.model.Patient;
+import com.openclassrooms.medilabo.patient.repository.PatientRepository;
 
 @Service
 public class PatientServiceImpl implements PatientService {
