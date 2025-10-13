@@ -21,6 +21,13 @@ import com.openclassrooms.medilabo.patient.service.PatientService;
 
 import jakarta.validation.Valid;
 
+/**
+ * Contrôleur REST pour la gestion des patients. Fournit des endpoints CRUD pour
+ * créer, lire, mettre à jour et supprimer des patients.
+ * 
+ * Respecte le principe REST et renvoie des ResponseEntity avec les codes HTTP
+ * appropriés.
+ */
 @RestController
 @RequestMapping("/patient")
 public class PatientController {
@@ -35,6 +42,12 @@ public class PatientController {
 		this.patientService = patientService;
 	}
 
+	/**
+	 * Récupère la liste de tous les patients.
+	 * 
+	 * @return ResponseEntity contenant la liste des patients et un code HTTP 200
+	 *         (OK)
+	 */
 	@GetMapping("/all")
 	public ResponseEntity<List<Patient>> getAllPatient() {
 		List<Patient> patients = patientService.getAllPatients();
@@ -43,6 +56,12 @@ public class PatientController {
 
 	}
 
+	/**
+	 * Récupère un patient spécifique par son identifiant.
+	 * 
+	 * @param id identifiant du patient
+	 * @return ResponseEntity contenant le patient s’il existe, ou 404 sinon
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable Integer id) {
 		return patientService.getPatientById(id).map(patient -> {
@@ -54,6 +73,13 @@ public class PatientController {
 		});
 	}
 
+	/**
+	 * Crée un nouveau patient.
+	 * 
+	 * @param patient le patient à sauvegarder (validé via @Valid)
+	 * @return ResponseEntity contenant le patient créé et un code HTTP 201
+	 *         (Created)
+	 */
 	@PostMapping
 	public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient) {
 		Patient saved = patientService.savePatient(patient);
@@ -61,6 +87,13 @@ public class PatientController {
 		return ResponseEntity.status(201).body(saved);
 	}
 
+	/**
+	 * Met à jour les informations d’un patient existant.
+	 * 
+	 * @param id            identifiant du patient à mettre à jour
+	 * @param updatePatient données du patient mises à jour
+	 * @return ResponseEntity contenant le patient mis à jour, ou 404 si non trouvé
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Integer id, @Valid @RequestBody Patient updatePatient) {
 		if (!patientService.getPatientById(id).isPresent()) {
@@ -73,6 +106,13 @@ public class PatientController {
 		return ResponseEntity.ok(updated);
 	}
 
+	/**
+	 * Supprime un patient par son identifiant.
+	 * 
+	 * @param id identifiant du patient à supprimer
+	 * @return ResponseEntity avec code HTTP 204 (No Content) si suppression
+	 *         réussie, ou 404 sinon
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletePatientById(@PathVariable Integer id) {
 		if (!patientService.getPatientById(id).isPresent()) {
