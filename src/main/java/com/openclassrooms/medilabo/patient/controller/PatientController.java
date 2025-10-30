@@ -32,12 +32,9 @@ import jakarta.validation.Valid;
 @RequestMapping("/patient")
 public class PatientController {
 
-	@Autowired
 	private PatientService patientService;
-
 	private static final Logger logger = LogManager.getLogger(PatientController.class);
 
-	@Autowired
 	public PatientController(PatientService patientService) {
 		this.patientService = patientService;
 	}
